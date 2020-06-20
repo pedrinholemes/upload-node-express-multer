@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% set pageId = 'page-create-point' %}
+{% block title %}
+  <title>Criar um ponto de coleta</title>
+{% endblock title %}
+{% block styles %}
+  <link rel="stylesheet" href="/styles/create-point.css">
+  <link rel="stylesheet" href="/styles/modal.css">
+  <link rel="stylesheet" href="/styles/tooltip.css">
+{% endblock styles %}
+{% block content %}
+  {% include 'partials/page-header.html' %}
+
+  <main>
+    <img src="/assets/create-post.jpg" alt="image">
+    <form action="/posts" method="post" enctype="multipart/form-data">
+      <h1>Criar um novo post</h1>
+      <fieldset>
+        <div class="field-group">
+          <div class="field">
+            <label for="file">Imagem
+              <a class="tooltip icon" data-tooltip="Imagem"></a>
+            </label>
+            <input type="file" name="file">
+          </div>
+        </div>
+      </fieldset>
+      <button type="submit">Cadastror ponto de coleta</button>
+    </form>
+
+  </main>
+{% endblock content %}
+{% block modal %}
+  {% if saved %}
+    {% include 'partials/point-created.html' %}
+  {% endif %}
+  {% if error %}
+    {% include 'partials/error-modal.html' %}
+  {% endif %}
+{% endblock modal %}

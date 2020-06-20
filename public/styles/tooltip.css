@@ -1,0 +1,56 @@
+a.tooltip {
+    text-decoration: none;
+    color: #000;
+    transition: all 0.4s ease;
+    -webkit-transition: all .4s ease;
+    padding: 5px;
+    background-color: #FFF;
+    position: relative;
+    cursor: pointer;
+}
+
+a.tooltip.icon {
+    color: #F57421;
+    margin-left: 2px;
+    background: url('../assets/help.svg');
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+}
+
+a.tooltip:before {
+    content: attr(data-tooltip);
+    background-color: #000;
+    color: #FFF;
+    font-size: 13px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: "Roboto";
+    position: absolute;
+    left: -100px;
+    bottom: 31px;
+    width: 250px;
+    opacity: 0;
+    transition: all .4s ease;
+}
+
+a.tooltip:after {
+    content: "";
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    left: -2px;
+    bottom: 21px;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #000 transparent;
+    transition: all .4s ease;
+    transform: rotate(180deg);
+}
+
+a.tooltip:hover:after,
+a.tooltip:hover:before {
+    opacity: 1;
+}

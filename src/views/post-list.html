@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% set pageId = 'page-search-results' %}
+{% block title %}
+  <title>Resultado da Pesquisa</title>
+{% endblock title %}
+{% block styles %}
+  <link rel="stylesheet" href="/styles/search-results.css">
+{% endblock styles %}
+{% block content %}
+
+  <header>
+    <img src="/assets/logo.svg" alt="Logo Ecoleta">
+
+    <a href="/">
+      <span></span>
+      Criar novo Post
+    </a>
+  </header>
+  <main>
+    {% if total > 0 %}
+      <div class="cards" style="grid-template-columns: repeat({{numberColunm}}, 1fr);">
+        <div class="card">
+          {% for post in colunm.colunm1 %}
+            <img src="/{{post.key}}" alt="{{post.name}}">
+          {% endfor %}
+        </div>
+        {% if numberColunm == 3 %}
+          <div class="card">
+            {% for post in colunm.colunm3 %}
+              <img src="/{{post.key}}" alt="{{post.name}}">
+            {% endfor %}
+          </div>
+        {% endif %}
+        <div class="card">
+          {% for post in colunm.colunm2 %}
+            <img src="/{{post.key}}" alt="{{post.name}}">
+          {% endfor %}
+        </div>
+      </div>
+      {%else%}
+      <h4>
+        <strong>Nenhum</strong>
+        post encontrado
+      </h4>
+    {% endif %}
+  </main>
+  <script>
+    const colunmJS = {
+      coluna1: {{colunm.colunm1.length}},
+      coluna2: {{colunm.colunm2.length}},
+      coluna3: {{colunm.colunm3.length}}
+
+    }
+  </script>
+
+{% endblock content %}

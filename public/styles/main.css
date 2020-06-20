@@ -1,0 +1,51 @@
+:root {
+    --title-color: #000;
+    --primary-color: #F57421;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background: #FFFFFF;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--title-color);
+    font-weight: 700;
+    font-family: Ubuntu, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+    border-radius: 8px;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+    background: #F4F4F4;
+    border-radius: 8px 0px 0px 8px;
+    transition: 500ms;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 8px 0px 0px 8px;
+    background: #dad7d7;
+}

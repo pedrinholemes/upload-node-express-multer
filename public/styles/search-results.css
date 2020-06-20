@@ -1,0 +1,70 @@
+#page-search-results {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#page-search-results header {
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#page-search-results header a {
+    color: var(--title-color);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+#page-search-results header a span {
+    margin-right: 16px;
+    background: url('../assets/arrow-left.svg');
+    width: 20px;
+    height: 24px;
+    display: flex;
+}
+
+main {
+    margin-top: 48px;
+    margin-bottom: 60px;
+    background-color: #fff;
+    padding: 24px 32px 24px 32px;
+}
+
+main h4 {
+    font-weight: normal;
+    font-family: Roboto, sans-serif;
+}
+
+main .cards {
+    display: grid;
+    column-gap: 24px;
+}
+
+main .cards .card {
+    width: 100%;
+    height: max-content;
+    padding: 5px !important;
+    box-sizing: border-box;
+    float: left;
+}
+
+main .cards .card img {
+    margin: 24px 0 24px 0;
+    width: 100%;
+    max-height: 100%;
+    border-radius: 2px;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    background: #FFE4D2;
+    top: 260px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
