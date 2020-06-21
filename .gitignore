@@ -4,3 +4,4 @@ node_modules
 
 tmp/uploads/*
 !tmp/uploads/.gitkeep
+src/data/database.db

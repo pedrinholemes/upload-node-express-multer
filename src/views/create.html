@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% set pageId = 'page-create-point' %}
 {% block title %}
-  <title>Criar um ponto de coleta</title>
+  <title>Criar um post</title>
 {% endblock title %}
 {% block styles %}
   <link rel="stylesheet" href="/styles/create-point.css">
@@ -13,7 +13,7 @@
 
   <main>
     <img src="/assets/create-post.jpg" alt="image">
-    <form action="/posts" method="post" enctype="multipart/form-data">
+    <form action="/" method="post" enctype="multipart/form-data">
       <h1>Criar um novo post</h1>
       <fieldset>
         <div class="field-group">
@@ -21,7 +21,11 @@
             <label for="file">Imagem
               <a class="tooltip icon" data-tooltip="Imagem"></a>
             </label>
-            <input type="file" name="file">
+            <input type="file" name="file" required="required" accept="
+              image/jpeg,
+              image/pjpeg,
+              image/png,
+              image/gif" capture="environment"/>
           </div>
         </div>
       </fieldset>

@@ -1,19 +1,12 @@
-<div id="modal" class="hide">
+<div id="modal" data-id="" data-key="" data-name="" class="hide">
   <div class="content">
     <div class="header">
-      <h1>Pontos de Coleta</h1>
-      <a class=closeButton href="#">Fechar</a>
+      <a class="remove">Excluir</a>
+      <h1 id="title"></h1>
+      <a class="closeButton">Fechar</a>
     </div>
-    <form action="search">
-      <label for="search">Cidade</label>
-      <div class="search field">
-        <input type="text" placeholder="Pesquise por Cidade" name="search" required>
-        <button>
-          <img src="/assets/search.svg" alt="Buscar">
-        </button>
-      </div>
-      <a class='listAll' href="/points">Listas Todos os Pontos de Coleta</a>
-    </form>
-    <a class=fullButton href="#"></a>
+    <div id="content" class="image">
+      <img src="" alt="" id="image"/>
+    </div>
   </div>
 </div>

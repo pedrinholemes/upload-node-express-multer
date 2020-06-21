@@ -4,57 +4,37 @@ const multerConfig = require("./config/multer");
 const db = require('./data/db')
 const Post = require("./data/Post");
 
-routes.get('/', (req, res) => {
+routes.get('/create', (req, res) => {
     return res.render('create.html')
 })
 
-routes.get("/posts", async(req, res) => {
+routes.get("/", async(req, res) => {
     db.all(`SELECT * FROM posts`, (err, rows) => {
         if (err) {
-            return console.log('\x1b[31m[Database]' + err + '\x1b[0m')
+            return console.log('\x1b[31m' + err + '\x1b[0m')
         }
-        console.log('\x1b[36m[database] Dados Requisitados\x1b[0m')
         var colunm1 = new Array()
         var colunm2 = new Array()
         var colunm3 = new Array()
         var numberColunm
-        if (rows.length > 10) {
-            for (let i = 0; i < Math.floor(rows.length / 2); i++) {
-                const image = rows[i];
+        for (let i = 0; i < rows.length; i++) {
+            const image = rows[i];
+            if (image.id % 2) {
+                colunm2.push(image)
+            } else {
                 colunm1.push(image)
             }
-            for (let i = Math.floor(rows.length / 2); i < rows.length; i++) {
-                const image = rows[i];
-                colunm2.push(image)
-            }
-            var numberColunm = 2
-        } else {
-            for (let i = 0; i < Math.floor(rows.length / 3); i++) {
-                const image = rows[i];
-                colunm1.push(image)
-            }
-            for (let i = Math.floor(rows.length / 3); i < Math.floor(rows.length / 3) * 2; i++) {
-                const image = rows[i];
-                colunm2.push(image)
-            }
-            for (let i = Math.floor(rows.length / 3) * 2; i < rows.length; i++) {
-                const image = rows[i];
-                colunm3.push(image)
-            }
-            var numberColunm = 3
         }
         const colunm = {
-                colunm1,
-                colunm2,
-                colunm3
-            }
-            // return res.json({ total: rows.length, colunm, dividido: Math.floor(rows.length / 3)})
-        return res.render('post-list.html', { posts: rows, total: rows.length, colunm, numberColunm });
+            colunm1,
+            colunm2
+        }
+        return res.render('post-list.html', { posts: rows, total: rows.length, colunm });
     });
 
 });
 
-routes.post("/posts", multer(multerConfig).single("file"), async(req, res) => {
+routes.post("/", multer(multerConfig).single("file"), async(req, res) => {
     if (!req.file) {
         return res.render('create.html', { error: true });
     }
@@ -67,14 +47,28 @@ routes.post("/posts", multer(multerConfig).single("file"), async(req, res) => {
 });
 
 routes.delete("/posts/:id", async(req, res) => {
-    const post = await Post.findById(req.params.id);
-
-    if (await Post.remove(post)) {
-        return res.status(200).send();
-    } else {
-        return res.status(500).send('Error');
-    }
-
+    db.all(`SELECT * FROM posts WHERE id = ${req.params.id}`, async(err, rows) => {
+        if (err) {
+            return console.log('\x1b[31m' + err + '\x1b[0m');
+        }
+        const post = rows[0];
+        return db.run(`DELETE FROM posts WHERE id = ${post.id}`, (err) => {
+            if (err) {
+                console.log('\x1b[31m' + err + '\x1b[0m')
+                return res.status(500).send(err);
+            }
+            return res.status(200).json(post);
+        })
+    })
+});
+routes.get("/posts/:id", async(req, res) => {
+    db.all(`SELECT * FROM posts WHERE id = ${req.params.id}`, async(err, rows) => {
+        if (err) {
+            return console.log('\x1b[31m' + err + '\x1b[0m');
+        }
+        const post = rows[0];
+        return res.redirect('/' + post.key)
+    })
 });
 
 module.exports = routes;
